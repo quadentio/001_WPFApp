@@ -24,5 +24,61 @@ namespace _001_WPFApp
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void applyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"The description is {this.descriptionTB.Text}");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void resetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.weldCheckbox.IsChecked = this.assemblyCheckbox.IsChecked = this.plasmaCheckbox.IsChecked = this.laserCheckbox.IsChecked = this.purchaseCheckbox.IsChecked = this.latheCheckbox.IsChecked = this.drillCheckbox.IsChecked = this.foldCheckbox.IsChecked = this.rollCheckbox.IsChecked = this.sawCheckbox.IsChecked = false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Checkbox_Checked(object sender, RoutedEventArgs e)
+        {
+            this.lengthTextBox.Text += ((CheckBox)(sender)).Content.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinishComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.noteTextBox == null) return;
+
+            var finishCmb = (ComboBox)sender;
+            var cmbSelItem = ((ComboBoxItem)finishCmb.SelectedValue);
+            string value = cmbSelItem.Content.ToString();
+
+            this.noteTextBox.Text = value;
+        }
+
+        /// <summary>
+        /// This event will fire after all control is loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            FinishComboBox_SelectionChanged(this.finishCmb, null);
+        }
     }
 }
